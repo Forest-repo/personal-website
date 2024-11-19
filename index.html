@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>李森林 | 个人网站</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Sans+SC:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- 左侧目录导航 -->
+    <nav class="side-nav">
+        <div class="nav-content">
+            <div class="nav-header">目录</div>
+            <ul>
+                <li><a href="#home" class="nav-item active">首页</a></li>
+                <li><a href="#about" class="nav-item">关于我</a></li>
+                <li><a href="#projects" class="nav-item">我的项目</a></li>
+                <li><a href="#contact" class="nav-item">联系方式</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <header>
+            <nav>
+                <div class="logo">李森林</div>
+                <ul>
+                    <li><a href="#home">首页</a></li>
+                    <li><a href="#about">关于</a></li>
+                    <li><a href="#projects">项目</a></li>
+                    <li><a href="#contact">联系</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <section id="home" class="hero">
+                <div class="hero-content">
+                    <h1>你好，我是 <span class="name-highlight">李森林</span></h1>
+                    <p class="subtitle">软件工程师 | 创新技术开发者</p>
+                    <div class="social-links">
+                        <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </section>
+
+            <section id="about" class="about">
+                <h2>关于我</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>你好！我是一名热衷于创造创新解决方案的软件工程师。我的专业知识涵盖多个技术领域，我始终保持学习和成长的热情。</p>
+                        <p>我信奉编写清晰、高效的代码，并用优雅的方案解决复杂的问题。</p>
+                    </div>
+                    <div class="skills">
+                        <h3>技术栈</h3>
+                        <ul>
+                            <li>Python</li>
+                            <li>JavaScript</li>
+                            <li>React</li>
+                            <li>Node.js</li>
+                            <li>Docker</li>
+                            <li>云技术</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="projects" class="projects">
+                <h2>我的项目</h2>
+                <div class="project-grid">
+                    <div class="project-card">
+                        <h3>CBV-WCF</h3>
+                        <p>这是 "CBV-WCF" 论文的官方仓库</p>
+                        <div class="project-links">
+                            <a href="https://github.com/Forest-repo/CBV-WCF" target="_blank" class="btn">查看项目</a>
+                            <a href="https://github.com/Forest-repo/CBV-WCF" target="_blank" class="btn-outline">GitHub</a>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <h3>图像质量评估系统</h3>
+                        <p>基于单视图和双视图的图像质量评估系统，帮助筛选高质量图片。</p>
+                        <div class="project-links">
+                            <a href="https://github.com/Forest-repo/Select-good-pic-by-single-and-two-view" target="_blank" class="btn">查看项目</a>
+                            <a href="https://github.com/Forest-repo/Select-good-pic-by-single-and-two-view" target="_blank" class="btn-outline">GitHub</a>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <h3>NLP课程项目</h3>
+                        <p>自然语言处理课程相关的项目实现和学习资料。</p>
+                        <div class="project-links">
+                            <a href="https://github.com/Forest-repo/nlp_course" target="_blank" class="btn">查看项目</a>
+                            <a href="https://github.com/Forest-repo/nlp_course" target="_blank" class="btn-outline">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact" class="contact">
+                <h2>联系我</h2>
+                <form class="contact-form">
+                    <input type="text" placeholder="您的姓名" required>
+                    <input type="email" placeholder="您的邮箱" required>
+                    <textarea placeholder="您的留言" required></textarea>
+                    <button type="submit" class="btn">发送消息</button>
+                </form>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2023 李森林. 保留所有权利。</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
