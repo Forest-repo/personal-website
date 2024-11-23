@@ -6,7 +6,7 @@ let isPaused = false;
 
 // 打字效果函数
 function type() {
-    const texts = ['软件工程师', '创新技术开发者'];
+    const texts = ['AI算法工程师', '软件工程师', '创新技术开发者'];
     const subtitle = document.querySelector('.subtitle');
     if (!subtitle) return;
 
@@ -24,21 +24,62 @@ function type() {
     let typeSpeed = isDeleting ? 100 : 200;
 
     if (!isDeleting && currentText === fullText) {
-        typeSpeed = 2000;
+        typeSpeed = 2000; // 停留时间
         isDeleting = true;
     } else if (isDeleting && currentText === '') {
         isDeleting = false;
         currentIndex++;
+        
+        // 如果已经显示完所有文本一遍，重置到第一个
+        if (currentIndex >= texts.length * 2) {
+            currentIndex = 0;
+        }
+        
         typeSpeed = 500;
     }
 
     setTimeout(type, typeSpeed);
 }
 
+// 技术栈动画
+function initSkillsAnimation() {
+    const skillItems = document.querySelectorAll('.skills ul li');
+    if (!skillItems.length) return;
+
+    // 添加初始样式
+    skillItems.forEach(item => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(20px)';
+    });
+
+    // 创建Intersection Observer
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const item = entry.target;
+                // 添加动画
+                item.style.transition = 'all 0.5s ease';
+                item.style.opacity = '1';
+                item.style.transform = 'translateY(0)';
+                // 停止观察这个元素
+                observer.unobserve(item);
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+
+    // 开始观察每个技能项
+    skillItems.forEach(item => observer.observe(item));
+}
+
 // 等待DOM加载完成
 document.addEventListener('DOMContentLoaded', function() {
     // 开始打字效果
-    setTimeout(type, 1500);
+    setTimeout(() => {
+        type();
+        initSkillsAnimation();
+    }, 1000);
 
     // 初始化音乐播放器
     initMusicPlayer();
