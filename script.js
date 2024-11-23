@@ -173,6 +173,13 @@ function initMusicPlayer() {
 
     // 音乐列表
     const songs = [
+        { name: '周杰伦 - 爱在西元前', path: 'music/周杰伦-爱在西元前.mp3' },
+        { name: '周深 - 若梦', path: 'music/周深-若梦-《与君歌》电视剧主题曲.mp3' },
+        { name: '林俊杰 - 起风了', path: 'music/林俊杰-起风了.mp3' },
+        { name: '梁博 - 出现又离开', path: 'music/梁博-出现又离开 (Live).mp3' },
+        { name: '梁博 - 日落大道', path: 'music/梁博-日落大道.mp3' },
+        { name: '梁博 - 曾经是情侣', path: 'music/梁博-曾经是情侣 (Live).mp3' },
+        { name: '梁博 - 男孩', path: 'music/梁博-男孩 (Live).mp3' },
         { name: '赵雷 - 八十年代的歌', path: 'music/赵雷-八十年代的歌.mp3' },
         { name: '赵雷 - 我记得', path: 'music/赵雷-我记得.mp3' },
         { name: '赵雷 - 玛丽', path: 'music/赵雷-玛丽.mp3' }
