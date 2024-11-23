@@ -6,7 +6,7 @@
     <title>Forest | 个人网站</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Sans+SC:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
     <div class="container">
@@ -15,10 +15,33 @@
                 <div class="logo">Forest</div>
                 <ul>
                     <li><a href="#home">首页</a></li>
-                    <li><a href="#about">关于</a></li>
-                    <li><a href="#projects">项目</a></li>
-                    <li><a href="#contact">联系</a></li>
+                    <li><a href="#about">关于我</a></li>
+                    <li><a href="#projects">我的项目</a></li>
+                    <li><a href="#contact">联系我</a></li>
                 </ul>
+                <div class="music-player">
+                    <div class="player-controls">
+                        <i class="fas fa-backward" id="prev-btn"></i>
+                        <i class="fas fa-play" id="play-btn"></i>
+                        <i class="fas fa-forward" id="next-btn"></i>
+                    </div>
+                    <div class="song-info">
+                        <span class="song-name">未播放</span>
+                        <div class="progress-container">
+                            <div class="progress-bar">
+                                <div class="progress"></div>
+                            </div>
+                            <div class="time-info">
+                                <span class="current-time">0:00</span>
+                                <span class="duration">0:00</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="volume-control">
+                        <i class="fas fa-volume-up" id="volume-icon"></i>
+                        <input type="range" id="volume-slider" min="0" max="100" value="50">
+                    </div>
+                </div>
             </nav>
         </header>
 

@@ -1,201 +1,252 @@
-// DOM 加载完成后执行
-document.addEventListener('DOMContentLoaded', () => {
-    // 导航功能
-    const navItems = document.querySelectorAll('.nav-item');
-    const sections = document.querySelectorAll('section');
+// 打字效果相关变量和函数
+let currentText = '';
+let currentIndex = 0;
+let isDeleting = false;
+let isPaused = false;
 
-    // 导航高亮
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const id = entry.target.getAttribute('id');
-                navItems.forEach(item => {
-                    item.classList.remove('active');
-                    if (item.getAttribute('href') === `#${id}`) {
-                        item.classList.add('active');
-                    }
-                });
+// 打字效果函数
+function type() {
+    const texts = ['软件工程师', '创新技术开发者'];
+    const subtitle = document.querySelector('.subtitle');
+    if (!subtitle) return;
 
-                // 如果是关于我部分，触发技能动画
-                if (id === 'about') {
-                    const skillItems = document.querySelectorAll('.skills ul li');
-                    skillItems.forEach((item, index) => {
-                        setTimeout(() => {
-                            item.classList.add('visible');
-                        }, index * 200); // 每个技能项依次显示
-                    });
-                }
-            }
-        });
-    }, { threshold: 0.5 });
+    const currentTextIndex = Math.floor(currentIndex / 2);
+    const fullText = texts[currentTextIndex % texts.length];
 
-    sections.forEach(section => {
-        observer.observe(section);
-    });
-
-    // 平滑滚动
-    navItems.forEach(item => {
-        item.addEventListener('click', (e) => {
-            e.preventDefault();
-            const targetId = item.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
-            targetSection.scrollIntoView({ behavior: 'smooth' });
-        });
-    });
-
-    // 滚动进度条
-    const progressBar = document.createElement('div');
-    progressBar.className = 'scroll-progress';
-    document.body.appendChild(progressBar);
-
-    window.addEventListener('scroll', () => {
-        const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const scrolled = (window.scrollY / windowHeight) * 100;
-        progressBar.style.width = `${scrolled}%`;
-
-        // 导航栏背景效果
-        const header = document.querySelector('header');
-        if (window.scrollY > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-    });
-
-    // 添加淡入动画
-    const fadeInElements = document.querySelectorAll('.hero-content h1, .hero-content p, .social-links');
-    fadeInElements.forEach((element, index) => {
-        element.style.opacity = '0';
-        element.style.transform = 'translateY(20px)';
-        setTimeout(() => {
-            element.style.transition = 'all 0.8s ease';
-            element.style.opacity = '1';
-            element.style.transform = 'translateY(0)';
-        }, index * 200);
-    });
-
-    // 移动端菜单切换
-    const menuToggle = document.createElement('div');
-    menuToggle.className = 'menu-toggle';
-    menuToggle.innerHTML = '<span></span><span></span><span></span>';
-    document.body.appendChild(menuToggle);
-
-    menuToggle.addEventListener('click', () => {
-        const sideNav = document.querySelector('.side-nav');
-        sideNav.classList.toggle('active');
-        menuToggle.classList.toggle('active');
-    });
-
-    // 导航栏切换功能
-    const navToggle = document.querySelector('.nav-toggle');
-    const body = document.body;
-
-    navToggle.addEventListener('click', () => {
-        body.classList.toggle('nav-hidden');
-    });
-
-    // 技能标签动画
-    const skillItems = document.querySelectorAll('.skills ul li');
-    skillItems.forEach((item, index) => {
-        setTimeout(() => {
-            item.classList.add('visible');
-        }, index * 200); // 每个标签延迟200ms出现
-    });
-
-    // 按钮点击波纹效果
-    document.querySelectorAll('.btn').forEach(button => {
-        button.addEventListener('click', function(e) {
-            const rect = this.getBoundingClientRect();
-            const ripple = document.createElement('div');
-            ripple.className = 'ripple';
-            ripple.style.left = `${e.clientX - rect.left}px`;
-            ripple.style.top = `${e.clientY - rect.top}px`;
-            this.appendChild(ripple);
-            
-            setTimeout(() => {
-                ripple.remove();
-            }, 600);
-        });
-    });
-
-    // 表单验证实现
-    const contactForm = document.querySelector('.contact-form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-            
-            if (!name || !email || !message) {
-                alert('请填写所有必填字段！');
-                return;
-            }
-            
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                alert('请输入有效的邮箱地址！');
-                return;
-            }
-            
-            alert('表单提交成功！我们会尽快回复您。');
-            contactForm.reset();
-        });
+    if (isDeleting) {
+        currentText = fullText.substring(0, currentText.length - 1);
+    } else {
+        currentText = fullText.substring(0, currentText.length + 1);
     }
 
-    // 添加动画效果
-    const animateElements = () => {
-        const elements = document.querySelectorAll('.animate');
-        elements.forEach(element => {
-            const elementTop = element.getBoundingClientRect().top;
-            const elementBottom = element.getBoundingClientRect().bottom;
-            const windowHeight = window.innerHeight;
+    subtitle.textContent = currentText;
 
-            if (elementTop < windowHeight * 0.8 && elementBottom > 0) {
-                element.classList.add('visible');
-            }
-        });
+    let typeSpeed = isDeleting ? 100 : 200;
+
+    if (!isDeleting && currentText === fullText) {
+        typeSpeed = 2000;
+        isDeleting = true;
+    } else if (isDeleting && currentText === '') {
+        isDeleting = false;
+        currentIndex++;
+        typeSpeed = 500;
+    }
+
+    setTimeout(type, typeSpeed);
+}
+
+// 等待DOM加载完成
+document.addEventListener('DOMContentLoaded', function() {
+    // 开始打字效果
+    setTimeout(type, 1500);
+
+    // 初始化音乐播放器
+    initMusicPlayer();
+});
+
+// 音乐播放器初始化
+function initMusicPlayer() {
+    console.log('Initializing music player...');
+
+    // 获取DOM元素
+    const audio = new Audio();
+    const playBtn = document.getElementById('play-btn');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const volumeSlider = document.getElementById('volume-slider');
+    const volumeIcon = document.getElementById('volume-icon');
+    const progressBar = document.querySelector('.progress');
+    const songName = document.querySelector('.song-name');
+    const currentTimeSpan = document.querySelector('.current-time');
+    const durationSpan = document.querySelector('.duration');
+
+    // 验证DOM元素
+    const elements = {
+        playBtn,
+        prevBtn,
+        nextBtn,
+        volumeSlider,
+        volumeIcon,
+        progressBar,
+        songName,
+        currentTimeSpan,
+        durationSpan
     };
 
-    window.addEventListener('scroll', animateElements);
-    animateElements(); // 初始检查
-
-    // 打字机效果实现
-    const typedText = document.querySelector('.typed-text');
-    const cursor = document.querySelector('.cursor');
-    const textArray = ["前端开发工程师", "后端开发工程师", "全栈工程师", "机器学习工程师"];
-    let textArrayIndex = 0;
-    let charIndex = 0;
-
-    // 打字效果的定时器函数
-    const type = () => {
-        if (charIndex < textArray[textArrayIndex].length) {
-            if(!cursor.classList.contains("typing")) cursor.classList.add("typing");
-            typedText.textContent += textArray[textArrayIndex].charAt(charIndex);
-            charIndex++;
-            setTimeout(type, 200);
-        } else {
-            cursor.classList.remove("typing");
-            setTimeout(erase, 2000);
+    // 检查是否所有元素都存在
+    let missingElements = false;
+    for (const [name, element] of Object.entries(elements)) {
+        if (!element) {
+            console.error(`Error: Could not find element: ${name}`);
+            missingElements = true;
         }
     }
 
-    // 删除文本的定时器函数
-    const erase = () => {
-        if (charIndex > 0) {
-            if(!cursor.classList.contains("typing")) cursor.classList.add("typing");
-            typedText.textContent = textArray[textArrayIndex].substring(0, charIndex-1);
-            charIndex--;
-            setTimeout(erase, 100);
+    // 如果有缺失元素，终止初始化
+    if (missingElements) {
+        console.error('Missing required elements, music player initialization aborted');
+        return;
+    }
+
+    console.log('All DOM elements found successfully');
+
+    // 播放器状态
+    let isPlaying = false;
+    let currentSongIndex = 0;
+    let previousVolume = 0.5;
+
+    // 音乐列表
+    const songs = [
+        { name: '赵雷 - 八十年代的歌', path: 'music/赵雷-八十年代的歌.mp3' },
+        { name: '赵雷 - 我记得', path: 'music/赵雷-我记得.mp3' },
+        { name: '赵雷 - 玛丽', path: 'music/赵雷-玛丽.mp3' }
+    ];
+
+    // 初始化音频
+    if (songs.length > 0) {
+        console.log('Setting initial song:', songs[0].name);
+        audio.src = songs[0].path;
+        songName.textContent = songs[0].name;
+    }
+
+    // 音量初始化
+    audio.volume = volumeSlider.value / 100;
+    console.log('Initial volume set to:', audio.volume);
+
+    // 错误处理
+    audio.addEventListener('error', function(e) {
+        console.error('Audio error:', e);
+        if (audio.error) {
+            console.error('Error code:', audio.error.code);
+            console.error('Error message:', audio.error.message);
+        }
+    });
+
+    // 加载并播放歌曲
+    function loadAndPlaySong() {
+        const song = songs[currentSongIndex];
+        console.log('Loading song:', song.name);
+        audio.src = song.path;
+        songName.textContent = song.name;
+        
+        audio.play()
+            .then(() => {
+                console.log('New song started playing:', song.name);
+                isPlaying = true;
+                playBtn.classList.replace('fa-play', 'fa-pause');
+            })
+            .catch(error => {
+                console.error('Error playing new song:', error);
+                console.error('Song path:', song.path);
+            });
+    }
+
+    // 更新音量图标
+    function updateVolumeIcon(value) {
+        if (value == 0) {
+            volumeIcon.classList.replace('fa-volume-up', 'fa-volume-mute');
         } else {
-            cursor.classList.remove("typing");
-            textArrayIndex++;
-            if(textArrayIndex >= textArray.length) textArrayIndex = 0;
-            setTimeout(type, 1000);
+            volumeIcon.classList.replace('fa-volume-mute', 'fa-volume-up');
         }
     }
 
-    // 开始第一轮打字动画
-    setTimeout(type, 1500);
-});
+    // 格式化时间
+    function formatTime(seconds) {
+        if (isNaN(seconds)) return '0:00';
+        
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = Math.floor(seconds % 60);
+        return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+    }
+
+    // 添加事件监听器
+    if (playBtn) {
+        playBtn.addEventListener('click', function() {
+            console.log('Play button clicked');
+            if (songs.length === 0) {
+                console.log('No songs in playlist');
+                return;
+            }
+            
+            if (isPlaying) {
+                console.log('Pausing playback');
+                audio.pause();
+                playBtn.classList.replace('fa-pause', 'fa-play');
+            } else {
+                console.log('Starting playback');
+                audio.play()
+                    .then(() => {
+                        console.log('Playback started successfully');
+                        playBtn.classList.replace('fa-play', 'fa-pause');
+                    })
+                    .catch(error => {
+                        console.error('Error playing audio:', error);
+                    });
+            }
+            isPlaying = !isPlaying;
+        });
+    }
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', function() {
+            console.log('Previous button clicked');
+            if (songs.length === 0) return;
+            
+            currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+            console.log('Switching to previous song, index:', currentSongIndex);
+            loadAndPlaySong();
+        });
+    }
+
+    if (nextBtn) {
+        nextBtn.addEventListener('click', function() {
+            console.log('Next button clicked');
+            if (songs.length === 0) return;
+            
+            currentSongIndex = (currentSongIndex + 1) % songs.length;
+            console.log('Switching to next song, index:', currentSongIndex);
+            loadAndPlaySong();
+        });
+    }
+
+    if (volumeSlider) {
+        volumeSlider.addEventListener('input', function(e) {
+            const value = e.target.value;
+            console.log('Volume changed to:', value);
+            audio.volume = value / 100;
+            updateVolumeIcon(value);
+        });
+    }
+
+    if (volumeIcon) {
+        volumeIcon.addEventListener('click', function() {
+            console.log('Volume icon clicked');
+            if (audio.volume > 0) {
+                previousVolume = audio.volume;
+                audio.volume = 0;
+                volumeSlider.value = 0;
+                volumeIcon.classList.replace('fa-volume-up', 'fa-volume-mute');
+                console.log('Muted audio');
+            } else {
+                audio.volume = previousVolume;
+                volumeSlider.value = previousVolume * 100;
+                volumeIcon.classList.replace('fa-volume-mute', 'fa-volume-up');
+                console.log('Unmuted audio, volume:', previousVolume);
+            }
+        });
+    }
+
+    if (audio) {
+        audio.addEventListener('timeupdate', function() {
+            const duration = audio.duration;
+            const currentTime = audio.currentTime;
+            const progressPercent = (currentTime / duration) * 100;
+            
+            progressBar.style.width = `${progressPercent}%`;
+            currentTimeSpan.textContent = formatTime(currentTime);
+            durationSpan.textContent = formatTime(duration);
+        });
+    }
+
+    console.log('Music player initialized successfully');
+}
