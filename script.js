@@ -2,7 +2,6 @@
 let currentText = '';
 let currentIndex = 0;
 let isDeleting = false;
-let isPaused = false;
 
 // 打字效果函数
 function type() {
@@ -10,8 +9,8 @@ function type() {
     const subtitle = document.querySelector('.subtitle');
     if (!subtitle) return;
 
-    const currentTextIndex = Math.floor(currentIndex / 2);
-    const fullText = texts[currentTextIndex % texts.length];
+    const currentTextIndex = currentIndex % texts.length;
+    const fullText = texts[currentTextIndex];
 
     if (isDeleting) {
         currentText = fullText.substring(0, currentText.length - 1);
@@ -29,12 +28,6 @@ function type() {
     } else if (isDeleting && currentText === '') {
         isDeleting = false;
         currentIndex++;
-        
-        // 如果已经显示完所有文本一遍，重置到第一个
-        if (currentIndex >= texts.length * 2) {
-            currentIndex = 0;
-        }
-        
         typeSpeed = 500;
     }
 
