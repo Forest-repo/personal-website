@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forest | 个人网站</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="loading.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Sans+SC:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
@@ -113,17 +114,65 @@
 
             <section id="contact" class="contact">
                 <h2>联系我</h2>
-                <form class="contact-form">
-                    <input type="text" placeholder="您的姓名" required>
-                    <input type="email" placeholder="您的邮箱" required>
-                    <textarea placeholder="您的留言" required></textarea>
-                    <button type="submit" class="btn">发送消息</button>
+                <form class="contact-form" id="contactForm" onsubmit="return handleSubmit(event)">
+                    <div class="form-overlay">
+                        <div class="loading-text">正在发送...</div>
+                    </div>
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_next" value="thanks.html">
+                    <input type="hidden" name="_subject" value="来自个人网站的新消息！">
+                    <input type="hidden" name="_autoresponse" value="感谢您的留言，我会尽快回复！">
+                    <input type="text" name="name" placeholder="您的姓名" required>
+                    <input type="email" name="email" placeholder="您的邮箱" required>
+                    <textarea name="message" placeholder="您的留言" required></textarea>
+                    <button type="submit" class="btn" id="submitBtn">发送消息</button>
                 </form>
+
+                <script>
+                async function handleSubmit(event) {
+                    event.preventDefault();
+                    const form = event.target;
+                    const submitBtn = document.getElementById('submitBtn');
+                    const overlay = form.querySelector('.form-overlay');
+                    
+                    // 禁用表单和按钮，显示加载状态
+                    submitBtn.disabled = true;
+                    submitBtn.classList.add('btn-loading');
+                    submitBtn.textContent = '发送中...';
+                    overlay.classList.add('active');
+                    
+                    // 收集表单数据
+                    const formData = new FormData(form);
+                    const data = {};
+                    formData.forEach((value, key) => data[key] = value);
+                    
+                    // 设置3秒后跳转
+                    setTimeout(() => {
+                        window.location.href = 'thanks.html';
+                    }, 3000);
+                    
+                    // 后台发送数据
+                    try {
+                        fetch('https://formsubmit.co/ajax/lsl18928704953@gmail.com', {
+                            method: 'POST',
+                            headers: { 
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json'
+                            },
+                            body: JSON.stringify(data)
+                        });
+                    } catch (error) {
+                        console.error('Error:', error);
+                    }
+                    
+                    return false;
+                }
+                </script>
             </section>
         </main>
 
         <footer>
-            <p>&copy; 2023 Forest. 保留所有权利。</p>
+            <p>&copy; 2024 Forest. 保留所有权利。</p>
         </footer>
     </div>
 
