@@ -76,6 +76,48 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 初始化音乐播放器
     initMusicPlayer();
+
+    // 添加项目卡片动画延迟
+    const projectCards = document.querySelectorAll('.project-card');
+    projectCards.forEach((card, index) => {
+        card.style.setProperty('--animation-order', index);
+    });
+
+    // 添加技能标签动画延迟
+    const skillItems = document.querySelectorAll('.skills ul li');
+    skillItems.forEach((item, index) => {
+        item.style.setProperty('--animation-order', index);
+    });
+
+    // 添加滚动动画
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const scrollObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                scrollObserver.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    // 为所有需要滚动动画的元素添加观察器
+    document.querySelectorAll('.scroll-reveal').forEach(el => {
+        scrollObserver.observe(el);
+    });
+
+    // 添加鼠标移动视差效果
+    document.addEventListener('mousemove', (e) => {
+        const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
+        const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
+        
+        document.querySelectorAll('.parallax').forEach(element => {
+            element.style.transform = `translate(${moveX}px, ${moveY}px)`;
+        });
+    });
 });
 
 // 音乐播放器初始化

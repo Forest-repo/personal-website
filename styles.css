@@ -237,6 +237,10 @@ nav ul li a:hover {
     min-height: 80vh;
     text-align: center;
     padding-top: 120px;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    color: white;
 }
 
 .hero-content h1 {
@@ -350,6 +354,8 @@ nav ul li a:hover {
     transition: all 0.3s ease;
     opacity: 0;
     transform: translateY(20px);
+    animation: fadeInUp 0.5s ease forwards;
+    animation-delay: calc(var(--animation-order) * 0.1s);
 }
 
 .skills ul li:hover {
@@ -412,6 +418,8 @@ nav ul li a:hover {
     box-shadow: var(--shadow);
     transition: all 0.3s ease;
     border: 1px solid rgba(0, 0, 0, 0.05);
+    animation: floatAnimation 6s ease-in-out infinite;
+    animation-delay: calc(var(--animation-order) * 0.2s);
 }
 
 .project-card:hover {
@@ -714,4 +722,29 @@ section {
     padding-top: 80px;  /* 增加section的顶部内边距 */
     margin-top: -80px;  /* 抵消锚点定位的偏移 */
     scroll-margin-top: 100px;  /* 为锚点导航添加滚动边距 */
+}
+
+@keyframes floatAnimation {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes ripple {
+    0% {
+        box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.2);
+    }
+    100% {
+        box-shadow: 0 0 0 20px rgba(37, 99, 235, 0);
+    }
+}
+
+.btn:hover {
+    animation: ripple 1s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
