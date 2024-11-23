@@ -314,47 +314,6 @@ footer {
     padding: 20px 0;
 }
 
-/* 左侧导航样式 */
-.side-nav {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 250px;
-    height: 100vh;
-    background-color: white;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-    z-index: 1000;
-}
-
-.nav-content {
-    padding: 20px;
-}
-
-.nav-header {
-    font-size: 1.2em;
-    font-weight: 600;
-    margin-bottom: 20px;
-    color: var(--primary-color);
-}
-
-.nav-item {
-    display: block;
-    padding: 10px 0;
-    color: var(--text-color);
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.nav-item:hover,
-.nav-item.active {
-    color: var(--primary-color);
-}
-
-/* 主内容区域样式 */
-.container {
-    margin-left: 250px;
-}
-
 /* 滚动进度条 */
 .scroll-progress {
     position: fixed;
@@ -495,10 +454,5 @@ footer {
     /* 在移动端隐藏导航菜单（后续可添加汉堡菜单） */
     nav ul {
         display: none;
-    }
-
-    .main-content {
-        margin-left: 0;
-        width: 100%;
     }
 }
