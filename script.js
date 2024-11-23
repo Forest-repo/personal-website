@@ -66,12 +66,103 @@ function initSkillsAnimation() {
     skillItems.forEach(item => observer.observe(item));
 }
 
+// 图片轮播功能
+function initImageSlider() {
+    const sliderWrapper = document.querySelector('.slider-wrapper');
+    const images = document.querySelectorAll('.slider-image');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    const dotsContainer = document.querySelector('.slider-dots');
+    
+    let currentIndex = 0;
+    const totalImages = images.length;
+
+    // 创建导航点
+    images.forEach((_, index) => {
+        const dot = document.createElement('div');
+        dot.classList.add('dot');
+        if (index === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => goToSlide(index));
+        dotsContainer.appendChild(dot);
+    });
+
+    // 更新轮播图位置
+    function updateSlider() {
+        sliderWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+        // 更新导航点
+        document.querySelectorAll('.dot').forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentIndex);
+        });
+    }
+
+    // 跳转到指定幻灯片
+    function goToSlide(index) {
+        currentIndex = index;
+        updateSlider();
+    }
+
+    // 下一张
+    function nextSlide() {
+        currentIndex = (currentIndex + 1) % totalImages;
+        updateSlider();
+    }
+
+    // 上一张
+    function prevSlide() {
+        currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+        updateSlider();
+    }
+
+    // 添加按钮事件监听
+    if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+    if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+
+    // 自动播放
+    let autoplayInterval = setInterval(nextSlide, 5000);
+
+    // 鼠标悬停时暂停自动播放
+    const sliderContainer = document.querySelector('.slider-container');
+    if (sliderContainer) {
+        sliderContainer.addEventListener('mouseenter', () => {
+            clearInterval(autoplayInterval);
+        });
+
+        sliderContainer.addEventListener('mouseleave', () => {
+            autoplayInterval = setInterval(nextSlide, 5000);
+        });
+    }
+
+    // 触摸滑动支持
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    sliderWrapper.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+    });
+
+    sliderWrapper.addEventListener('touchmove', (e) => {
+        touchEndX = e.touches[0].clientX;
+    });
+
+    sliderWrapper.addEventListener('touchend', () => {
+        const difference = touchStartX - touchEndX;
+        if (Math.abs(difference) > 50) {
+            if (difference > 0) {
+                nextSlide();
+            } else {
+                prevSlide();
+            }
+        }
+    });
+}
+
 // 等待DOM加载完成
 document.addEventListener('DOMContentLoaded', function() {
     // 开始打字效果
     setTimeout(() => {
         type();
         initSkillsAnimation();
+        initImageSlider();  // 初始化图片轮播
     }, 1000);
 
     // 初始化音乐播放器

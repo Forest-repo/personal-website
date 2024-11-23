@@ -6,6 +6,7 @@
     <title>Forest | 个人网站</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="loading.css">
+    <link rel="stylesheet" href="slider.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Sans+SC:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
@@ -59,25 +60,40 @@
 
             <section id="about" class="about" style="margin-top: 80px; padding-top: 40px;">
                 <h2>关于我</h2>
-                <div class="about-content" style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: start; padding: 0 20px;">
-                    <div class="about-text" style="background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease;">
-                        <p style="margin-bottom: 20px; line-height: 1.8; color: #444; font-size: 1.1em; text-align: justify; letter-spacing: 0.5px;">我是一名在重庆的AI算法工程师，硕士学历，热爱编程和篮球。我将AI技术融入软件，追求清晰高效的代码，解决复杂问题。我不断学习，保持技术前沿，期待与伙伴们共创技术未来。让我们用智慧和努力，为世界带来积极变革。</p>
+                <div class="about-content" style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; padding: 0 20px;">
+                    <div class="about-left">
+                        <div class="about-text" style="background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease; margin-bottom: 30px;">
+                            <p style="margin-bottom: 20px; line-height: 1.8; color: #444; font-size: 1.1em; text-align: justify; letter-spacing: 0.5px;">我是一名在重庆的AI算法工程师，硕士学历，热爱编程和篮球。我将AI技术融入软件，追求清晰高效的代码，解决复杂问题。我不断学习，保持技术前沿，期待与伙伴们共创技术未来。让我们用智慧和努力，为世界带来积极变革。</p>
+                        </div>
+                        <div class="skills">
+                            <h3 class="scroll-reveal">技术栈</h3>
+                            <ul class="scroll-reveal">
+                                <li>Python</li>
+                                <li>PyTorch</li>
+                                <li>TensorFlow</li>
+                                <li>Scikit-learn</li>
+                                <li>MySQL</li>
+                                <li>JavaScript</li>
+                                <li>React</li>
+                                <li>Node.js</li>
+                                <li>Docker</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="skills">
-                        <h3 class="scroll-reveal">技术栈</h3>
-                        <ul class="scroll-reveal">
-                            <li>Python</li>
-                            <li>PyTorch</li>
-                            <li>TensorFlow</li>
-                            <li>Scikit-learn</li>
-                            <li>MySQL</li>
-                            <li>JavaScript</li>
-                            <li>React</li>
-                            <li>Node.js</li>
-                            <li>Docker</li>
-                            
-
-                        </ul>
+                    <div class="image-slider">
+                        <div class="slider-container">
+                            <div class="slider-wrapper">
+                                <img src="imgs/mm1.jpg" alt="个人照片1" class="slider-image">
+                                <img src="imgs/mm2.jpg" alt="个人照片2" class="slider-image">
+                                <img src="imgs/mm3.jpg" alt="个人照片3" class="slider-image">
+                                <img src="imgs/mm4.jpg" alt="个人照片4" class="slider-image">
+                            </div>
+                            <div class="slider-nav">
+                                <button class="prev-btn"><i class="fas fa-chevron-left"></i></button>
+                                <button class="next-btn"><i class="fas fa-chevron-right"></i></button>
+                            </div>
+                            <div class="slider-dots"></div>
+                        </div>
                     </div>
                 </div>
             </section>
