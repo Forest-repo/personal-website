@@ -79,6 +79,7 @@
 - GitHub Pages
 - Netlify
 - Vercel
+- neocities
 - 任何静态网站托管服务
 
 ## 浏览器支持
