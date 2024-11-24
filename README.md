@@ -4,6 +4,45 @@
 ## 概述
 一个现代化的响应式个人作品集网站，用于展示专业技能、项目经验和联系方式。
 
+## 项目结构
+
+```
+personal-website/
+│
+├── index.html          # 主页面
+├── thanks.html         # 感谢页面
+│
+├── css/               # 样式文件
+│   ├── styles.css     # 主样式
+│   ├── loading.css    # 加载动画样式
+│   └── slider.css     # 滑块组件样式
+│
+├── js/                # JavaScript文件
+│   └── script.js      # 主脚本文件
+│
+├── assets/            # 静态资源
+│   ├── images/        # 图片资源
+│   │   └── ...
+│   └── music/         # 音乐文件
+│       └── ...
+│
+└── README.md          # 项目说明文档
+```
+
+## 目录说明
+
+- `css/`: 存放所有CSS样式文件
+  - `styles.css`: 网站主要样式
+  - `loading.css`: 加载动画相关样式
+  - `slider.css`: 滑块组件样式
+
+- `js/`: 存放JavaScript脚本文件
+  - `script.js`: 主要的JavaScript功能实现
+
+- `assets/`: 存放静态资源文件
+  - `images/`: 图片资源目录
+  - `music/`: 音乐文件目录
+
 ## 项目功能
 - 动态展示效果
 - 音乐播放器

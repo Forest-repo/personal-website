@@ -262,25 +262,65 @@ function initMusicPlayer() {
     let currentSongIndex = 0;
     let previousVolume = 0.5;
 
-    // 音乐列表
-    const songs = [
-        { name: '周杰伦 - 爱在西元前', path: 'music/周杰伦-爱在西元前.mp3' },
-        { name: '周深 - 若梦', path: 'music/周深-若梦-《与君歌》电视剧主题曲.mp3' },
-        { name: '林俊杰 - 起风了', path: 'music/林俊杰-起风了.mp3' },
-        { name: '梁博 - 出现又离开', path: 'music/梁博-出现又离开 (Live).mp3' },
-        { name: '梁博 - 日落大道', path: 'music/梁博-日落大道.mp3' },
-        { name: '梁博 - 曾经是情侣', path: 'music/梁博-曾经是情侣 (Live).mp3' },
-        { name: '梁博 - 男孩', path: 'music/梁博-男孩 (Live).mp3' },
-        { name: '赵雷 - 八十年代的歌', path: 'music/赵雷-八十年代的歌.mp3' },
-        { name: '赵雷 - 我记得', path: 'music/赵雷-我记得.mp3' },
-        { name: '赵雷 - 玛丽', path: 'music/赵雷-玛丽.mp3' }
+    // 音乐播放列表
+    const playlist = [
+        {
+            title: '爱在西元前',
+            artist: '周杰伦',
+            file: 'assets/music/周杰伦-爱在西元前.mp3'
+        },
+        {
+            title: '若梦',
+            artist: '周深',
+            file: 'assets/music/周深-若梦-《与君歌》电视剧主题曲.mp3'
+        },
+        {
+            title: '起风了',
+            artist: '林俊杰',
+            file: 'assets/music/林俊杰-起风了.mp3'
+        },
+        {
+            title: '出现又离开',
+            artist: '梁博',
+            file: 'assets/music/梁博-出现又离开 (Live).mp3'
+        },
+        {
+            title: '日落大道',
+            artist: '梁博',
+            file: 'assets/music/梁博-日落大道.mp3'
+        },
+        {
+            title: '曾经是情侣',
+            artist: '梁博',
+            file: 'assets/music/梁博-曾经是情侣 (Live).mp3'
+        },
+        {
+            title: '男孩',
+            artist: '梁博',
+            file: 'assets/music/梁博-男孩 (Live).mp3'
+        },
+        {
+            title: '八十年代的歌',
+            artist: '赵雷',
+            file: 'assets/music/赵雷-八十年代的歌.mp3'
+        },
+        {
+            title: '我记得',
+            artist: '赵雷',
+            file: 'assets/music/赵雷-我记得.mp3'
+        },
+        {
+            title: '玛丽',
+            artist: '赵雷',
+            file: 'assets/music/赵雷-玛丽.mp3'
+        }
     ];
 
     // 初始化音频
-    if (songs.length > 0) {
-        console.log('Setting initial song:', songs[0].name);
-        audio.src = songs[0].path;
-        songName.textContent = songs[0].name;
+    if (playlist.length > 0) {
+        console.log('Setting initial song:', playlist[0].title);
+        audio.src = playlist[0].file;
+        songName.textContent = playlist[0].title;
     }
 
     // 音量初始化
@@ -298,20 +338,20 @@ function initMusicPlayer() {
 
     // 加载并播放歌曲
     function loadAndPlaySong() {
-        const song = songs[currentSongIndex];
-        console.log('Loading song:', song.name);
-        audio.src = song.path;
-        songName.textContent = song.name;
+        const song = playlist[currentSongIndex];
+        console.log('Loading song:', song.title);
+        audio.src = song.file;
+        songName.textContent = song.title;
         
         audio.play()
             .then(() => {
-                console.log('New song started playing:', song.name);
+                console.log('New song started playing:', song.title);
                 isPlaying = true;
                 playBtn.classList.replace('fa-play', 'fa-pause');
             })
             .catch(error => {
                 console.error('Error playing new song:', error);
-                console.error('Song path:', song.path);
+                console.error('Song path:', song.file);
             });
     }
 
@@ -337,7 +377,7 @@ function initMusicPlayer() {
     if (playBtn) {
         playBtn.addEventListener('click', function() {
             console.log('Play button clicked');
-            if (songs.length === 0) {
+            if (playlist.length === 0) {
                 console.log('No songs in playlist');
                 return;
             }
@@ -364,9 +404,9 @@ function initMusicPlayer() {
     if (prevBtn) {
         prevBtn.addEventListener('click', function() {
             console.log('Previous button clicked');
-            if (songs.length === 0) return;
+            if (playlist.length === 0) return;
             
-            currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+            currentSongIndex = (currentSongIndex - 1 + playlist.length) % playlist.length;
             console.log('Switching to previous song, index:', currentSongIndex);
             loadAndPlaySong();
         });
@@ -375,9 +415,9 @@ function initMusicPlayer() {
     if (nextBtn) {
         nextBtn.addEventListener('click', function() {
             console.log('Next button clicked');
-            if (songs.length === 0) return;
+            if (playlist.length === 0) return;
             
-            currentSongIndex = (currentSongIndex + 1) % songs.length;
+            currentSongIndex = (currentSongIndex + 1) % playlist.length;
             console.log('Switching to next song, index:', currentSongIndex);
             loadAndPlaySong();
         });
