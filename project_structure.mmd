@@ -1,0 +1,64 @@
+graph TD
+    %% 主要结构
+    A[个人网站] --> B[页面结构]
+    A --> C[功能模块]
+    A --> D[资源文件]
+    A --> E[文档]
+
+    %% 页面结构
+    B --> B1[index.html]
+    B --> B2[thanks.html]
+    B --> B3[样式文件]
+
+    %% index.html详情
+    B1 --> B1_1[导航栏]
+    B1 --> B1_2[主页sections]
+    B1_1 --> B1_1_1[Logo]
+    B1_1 --> B1_1_2[导航链接]
+    B1_1 --> B1_1_3[音乐播放器]
+    B1_2 --> B1_2_1[Home Section]
+    B1_2 --> B1_2_2[About Section]
+    B1_2 --> B1_2_3[Projects Section]
+    B1_2 --> B1_2_4[Contact Section]
+
+    %% thanks.html详情
+    B2 --> B2_1[感谢信息]
+    B2 --> B2_2[返回按钮]
+    B2 --> B2_3[页脚]
+
+    %% 样式文件详情
+    B3 --> B3_1[styles.css/主样式]
+    B3 --> B3_2[loading.css/加载动画]
+    B3 --> B3_3[slider.css/轮播样式]
+
+    %% 功能模块
+    C --> C1[打字效果]
+    C --> C2[技能展示动画]
+    C --> C3[图片轮播]
+    C --> C4[音乐播放器]
+    C --> C5[表单提交]
+
+    %% 资源文件
+    D --> D1[图片资源/imgs]
+    D --> D2[音乐文件/music]
+    D --> D3[字体图标]
+
+    %% 文档
+    E --> E1[README.md]
+
+    %% 功能模块详细说明
+    C1 --> C1_1[动态文字切换]
+    C2 --> C2_1[IntersectionObserver监听]
+    C3 --> C3_1[自动轮播]
+    C3 --> C3_2[手动控制]
+    C4 --> C4_1[播放控制]
+    C4 --> C4_2[进度条]
+    C4 --> C4_3[音量控制]
+    C5 --> C5_1[提交后跳转thanks.html]
+
+    %% 样式说明
+    style A fill:#f9f,stroke:#333,stroke-width:4px
+    style B fill:#bbf,stroke:#333,stroke-width:2px
+    style C fill:#bfb,stroke:#333,stroke-width:2px
+    style D fill:#fbb,stroke:#333,stroke-width:2px
+    style E fill:#ff9,stroke:#333,stroke-width:2px
