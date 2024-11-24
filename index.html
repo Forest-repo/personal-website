@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/loading.css">
     <link rel="stylesheet" href="css/slider.css">
+    <link rel="stylesheet" href="css/chat.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Sans+SC:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
@@ -131,6 +134,29 @@
                 </div>
             </section>
 
+            <!-- AI Chat Section -->
+            <section class="chat-section">
+                <div class="chat-container">
+                    <div class="chat-header">
+                        <h2>与我对话</h2>
+                        <p>由 Forest 提供支持</p>
+                    </div>
+                    <div class="chat-messages">
+                        <div class="message bot">
+                            <div class="message-content">
+                                你好！我是小森同学，一个由Forest创建的人工智能助手。我可以回答你的问题，提供帮助和建议。请随时向我提问！
+                            </div>
+                        </div>
+                    </div>
+                    <div class="typing-indicator">小森同学 正在输入...</div>
+                    <div class="chat-input">
+                        <textarea placeholder="输入你的问题..."></textarea>
+                        <button>发送</button>
+                    </div>
+                    <div class="error-message"></div>
+                </div>
+            </section>
+
             <section id="contact" class="contact" style="margin-top: 100px; padding-top: 60px;">
                 <h2>联系我</h2>
                 <form class="contact-form" id="contactForm" onsubmit="return handleSubmit(event)">
@@ -196,5 +222,9 @@
     </div>
 
     <script src="js/script.js"></script>
+    <script src="js/chat.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-javascript.min.js"></script>
 </body>
 </html>
