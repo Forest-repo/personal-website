@@ -5,15 +5,30 @@ class ChatUI {
         this.sendButton = document.querySelector('.chat-input button');
         this.typingIndicator = document.querySelector('.typing-indicator');
         this.errorMessage = document.querySelector('.error-message');
+        this.modelButtons = document.querySelectorAll('.model-btn');
         
         this.isProcessing = false;
         this.messageQueue = [];
         this.currentMessageDiv = null;
         this.lastRequestTime = 0;
-        this.API_KEY = 'cacca7eb262381e7eff5f9a2c03ff8c5.GyevOrAKZSxFTHod';
-        this.API_URL = 'https://open.bigmodel.cn/api/paas/v4/chat/completions';
-        this.MIN_REQUEST_INTERVAL = 2000; // 最小请求间隔（毫秒）
-        this.MAX_RETRIES = 3; // 最大重试次数
+        
+        // API配置
+        this.currentModel = 'standard'; // 默认使用通用版
+        this.apiConfig = {
+            standard: {
+                apiKey: 'cacca7eb262381e7eff5f9a2c03ff8c5.GyevOrAKZSxFTHod',
+                apiUrl: 'https://open.bigmodel.cn/api/paas/v4/chat/completions',
+                model: 'glm-4-flash'
+            },
+            premium: {
+                apiKey: 'sk-VQeqFqLUcjaRwmlMESuXsPNBNgCyRTYPZw9S7NTlpB5fAV6c',
+                apiUrl: 'https://api.moonshot.cn/v1/chat/completions',
+                model: 'moonshot-v1-8k'
+            }
+        };
+        
+        this.MIN_REQUEST_INTERVAL = 2000;
+        this.MAX_RETRIES = 3;
         
         this.initEventListeners();
     }
@@ -31,6 +46,15 @@ class ChatUI {
         this.inputField.addEventListener('input', () => {
             this.inputField.style.height = 'auto';
             this.inputField.style.height = (this.inputField.scrollHeight) + 'px';
+        });
+
+        // 添加模型切换事件监听
+        this.modelButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                this.modelButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                this.currentModel = btn.dataset.model;
+            });
         });
     }
 
@@ -105,15 +129,16 @@ class ChatUI {
     }
 
     async streamResponse(message, retryCount = 0) {
+        const config = this.apiConfig[this.currentModel];
         try {
-            const response = await fetch(this.API_URL, {
+            const response = await fetch(config.apiUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${this.API_KEY}`
+                    'Authorization': `Bearer ${config.apiKey}`
                 },
                 body: JSON.stringify({
-                    model: "glm-4-flash",
+                    model: config.model,
                     messages: [
                         {
                             "role": "system",

@@ -332,6 +332,34 @@
     border-bottom-color: #0366d6;
 }
 
+.model-switch {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.model-btn {
+    padding: 8px 16px;
+    border: 2px solid var(--primary-color);
+    border-radius: 20px;
+    background: transparent;
+    color: var(--primary-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.model-btn:hover {
+    background: rgba(37, 99, 235, 0.1);
+}
+
+.model-btn.active {
+    background: var(--primary-color);
+    color: white;
+}
+
 @media (max-width: 768px) {
     .chat-container {
         margin: 0 20px;
