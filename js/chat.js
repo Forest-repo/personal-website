@@ -10,8 +10,8 @@ class ChatUI {
         this.messageQueue = [];
         this.currentMessageDiv = null;
         this.lastRequestTime = 0;
-        this.MOONSHOT_API_KEY = 'sk-VQeqFqLUcjaRwmlMESuXsPNBNgCyRTYPZw9S7NTlpB5fAV6c';
-        this.API_URL = 'https://api.moonshot.cn/v1/chat/completions';
+        this.API_KEY = 'cacca7eb262381e7eff5f9a2c03ff8c5.GyevOrAKZSxFTHod';
+        this.API_URL = 'https://open.bigmodel.cn/api/paas/v4/chat/completions';
         this.MIN_REQUEST_INTERVAL = 2000; // 最小请求间隔（毫秒）
         this.MAX_RETRIES = 3; // 最大重试次数
         
@@ -110,10 +110,10 @@ class ChatUI {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${this.MOONSHOT_API_KEY}`
+                    'Authorization': `Bearer ${this.API_KEY}`
                 },
                 body: JSON.stringify({
-                    model: "moonshot-v1-8k",
+                    model: "glm-4-flash",
                     messages: [
                         {
                             "role": "system",
